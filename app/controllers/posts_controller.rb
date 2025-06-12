@@ -1,6 +1,8 @@
 class PostsController < ApplicationController
-
+    #  make sure that the user is logged in before it can access the pages related to the PostsController
+    before_action :authenticate_user, only: [:new, :create]
     def index
+        @posts = Post.all.order('created_at DESC')
     end
 
     def new
@@ -19,6 +21,6 @@ class PostsController < ApplicationController
     private
 
     def post_params
-        params.require(:post).permit(:photo, :caption)
+        params.require(:post).permit(:photo, :description)
     end
 end

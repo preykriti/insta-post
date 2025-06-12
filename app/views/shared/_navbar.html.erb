@@ -1,0 +1,15 @@
+<nav class = " px-4 py-3  bg-slate-300 flex justify-between font-dosis items-center">
+   
+<h3 class = "text-2xl font-dosis text-primary"><a href="/">InstaPost</a></h3>
+<div class="flex justify-between gap-4 align-center items-center">
+
+    <% if current_user %>
+        <%= link_to "New Post", new_post_path %>
+        <%= link_to "Log Out", logout_path, method: "delete", class: "block rounded py-2 px-3 text-white bg-blue-700 md:p-0"%>
+    <% else %>
+        <%= link_to "Sign Up", signup_path, class: "block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0" %>
+        <%= link_to 'Log In', login_path, class:"block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0" %>
+    <% end %>
+
+</div>
+</nav>
