@@ -1,5 +1,7 @@
 class CommentsController < ApplicationController
-    before_action :authenticate_user, only: [:new, :create]
+    before_action :authenticate_user, only: [ :create]
+
+
     def create
         @post = Post.find(params[:post_id])
         @comment = @post.comments.create(comment_params.merge(user_id: current_user.id))
@@ -10,7 +12,12 @@ class CommentsController < ApplicationController
             redirect_to root_path
         end
     end
-
+    def destroy
+        @comment = Comment.find(params[:id])
+        @comment.destroy
+        redirect_to root_path
+    end
+        
 
     private
 
