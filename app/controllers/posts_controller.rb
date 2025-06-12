@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
     #  make sure that the user is logged in before it can access the pages related to the PostsController
     before_action :authenticate_user, only: [:new, :create]
+    before_action :is_owner?, only: [:edit, :update, :destroy]
     def index
         @posts = Post.all.order('created_at DESC')
     end
@@ -38,9 +39,15 @@ class PostsController < ApplicationController
         redirect_to root_path
     end
 
+
+
     private
 
     def post_params
         params.require(:post).permit(:photo, :description)
+    end
+
+    def is_owner?
+        redirect_to root_path if Post.find(params[:id]).user != current_user
     end
 end
