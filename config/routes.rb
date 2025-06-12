@@ -9,9 +9,12 @@ Rails.application.routes.draw do
   delete 'logout', to: 'sessions#destroy', as: 'logout'
 
   resources :users
-  # get "home/index"
+  get "home/index"
 
-  root 'home#index'
+  resources :posts
+
+  # root 'home#index'
+  root 'posts#index'
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
